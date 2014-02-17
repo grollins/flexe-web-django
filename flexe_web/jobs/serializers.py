@@ -14,11 +14,11 @@ class JobSerializer(serializers.HyperlinkedModelSerializer):
 
     class Meta:
         model = Job
-        fields = ('title', 'status', 'owner', 'reference_file', 'comparison_file',
+        fields = ('id', 'url', 'title', 'status', 'owner', 'reference', 'comparison',
                   'result')
         read_only_fields = ('status',)
 
-    def validate_reference_file(self, attrs, source):
+    def validate_reference(self, attrs, source):
         """
         Check that reference file is a pdb file.
         """
@@ -28,7 +28,7 @@ class JobSerializer(serializers.HyperlinkedModelSerializer):
         else:
             raise serializers.ValidationError('Reference file must be a .pdb file.')
 
-    def validate_topology(self, attrs, source):
+    def validate_comparison(self, attrs, source):
         """
         Check that comparison file is a pdb file or a zip of pdbs.
         """

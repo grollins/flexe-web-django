@@ -15,8 +15,8 @@ def run_flexe_calculation(job_id):
     temp_dir = mkdtemp()
     temp_ref_path = join(temp_dir, 'ref.pdb')
     temp_comparison_path = join(temp_dir, 'comparison.pdb')
-    copyfile(job.reference_file.path, temp_ref_path)
-    copyfile(job.comparison_file.path, temp_comparison_path)
+    copyfile(job.reference.path, temp_ref_path)
+    copyfile(job.comparison.path, temp_comparison_path)
     logging.info( "%s %s" % (temp_ref_path, temp_comparison_path))
     try:
         f = FlexE(ref_pdb_file=temp_ref_path)
@@ -36,5 +36,7 @@ def run_flexe_calculation(job_id):
 
 def create_result_obj(job, output):
     rmsd, energy_ref_to_pdb, energy_pdb_to_ref = output
-    r = Result.objects.create(job=job, **output)
+    r = Result.objects.create(job=job, rmsd=rmsd,
+                              energy_ref_to_pdb=energy_ref_to_pdb,
+                              energy_pdb_to_ref=energy_pdb_to_ref)
     return

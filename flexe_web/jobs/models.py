@@ -18,8 +18,8 @@ def create_auth_token(sender, instance=None, created=False, **kwargs):
 class Job(StatusModel):
     STATUS = Choices('submitted', 'queued', 'done', 'error')
     title = models.CharField(max_length=100, blank=True, default='')
-    reference_file = models.FileField(upload_to='tmp/%Y/%m/%d')
-    comparison_file = models.FileField(upload_to='tmp/%Y/%m/%d')
+    reference = models.FileField(upload_to='tmp/%Y/%m/%d')
+    comparison = models.FileField(upload_to='tmp/%Y/%m/%d')
     owner = models.ForeignKey('auth.User', related_name='jobs')
     created_on = models.DateTimeField(auto_now_add=True)
 
@@ -31,4 +31,5 @@ class Job(StatusModel):
 class Result(models.Model):
     job = models.ForeignKey('Job', related_name='result')
     rmsd = models.FloatField(default=-99.9)
-    
+    energy_ref_to_pdb = models.FloatField(default=-99.9)
+    energy_pdb_to_ref = models.FloatField(default=-99.9)
