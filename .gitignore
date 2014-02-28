@@ -1,2 +1,8 @@
+.DS_Store
 *.pyc
 *.pdb
+*.log
+flexe_web/assets
+flexe_web/media
+flexe_web/static
+server_files
