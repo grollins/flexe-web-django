@@ -33,3 +33,4 @@ class Result(models.Model):
     rmsd = models.FloatField(default=-99.9)
     energy_ref_to_pdb = models.FloatField(default=-99.9)
     energy_pdb_to_ref = models.FloatField(default=-99.9)
+    name = models.CharField(max_length=100, blank=True, default='')

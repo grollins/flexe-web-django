@@ -30,13 +30,15 @@ class JobSerializer(serializers.HyperlinkedModelSerializer):
 
     def validate_comparison(self, attrs, source):
         """
-        Check that comparison file is a pdb file or a zip of pdbs.
+        Check that comparison file is a pdb file or a zip file (of pdbs).
         """
         uploaded_file = attrs[source]
         if uploaded_file.name.endswith('.pdb'):
             return attrs
+        elif uploaded_file.name.endswith('.zip'):
+            return attrs
         else:
-            raise serializers.ValidationError('Comparison file must be a .pdb file.')
+            raise serializers.ValidationError('Comparison file must be a .pdb file or .zip file.')
 
 
 class UserSerializer(serializers.HyperlinkedModelSerializer):
