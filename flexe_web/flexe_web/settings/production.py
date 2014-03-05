@@ -47,11 +47,8 @@ CACHES = {
 SECRET_KEY = get_env_setting('DJANGO_SECRET_KEY')
 ########## END SECRET CONFIGURATION
 
-CORS_ORIGIN_WHITELIST = (
-    'flexeweb.grollins.webfactional.com'
-)
-
-API_AUDIENCE = 'http://flexeweb.grollins.webfactional.com'
+CORS_ORIGIN_WHITELIST = ('flexe.dillgroup.io',)
+API_AUDIENCE = 'http://flexe.dillgroup.io'
 
 # ========================
 # = CELERY CONFIGURATION =
